@@ -10,7 +10,7 @@ st.set_page_config(
 
 def main():
     st.title('Online Review Analyser')
-    image = Image.open('C:\\Users\\DELL\\Desktop\\Online review analyzer\\analyze_pics.jpg')
+    image = Image.open('https://github.com/Heartz00/Online-review-analyzer/blob/792bd573ac7d67ef0ce9291be64122a6ba8d902b/analyze_pics.jpg')
     n_image = image.resize((500,300))
     st.image(n_image)
     st.write('Welcome to the review analyser, you can check the sentiment of products reviews here in few seconds')
