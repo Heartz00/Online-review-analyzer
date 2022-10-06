@@ -26,7 +26,7 @@ def main():
         st.write("The review is  ", sentiment_dict['neu']*100, "% Neutral")
         st.write("The review is  ", sentiment_dict['pos']*100, "% Positive")
         st.write("Overall Review Analysis :", end = " ")
-        if sentiment_dict['compound'] >= 0.05 :
+        if sentiment_dict['compound'] >= 0.35 :
             st.success("Positive 👍")
  
         elif sentiment_dict['compound'] <= - 0.05 :
