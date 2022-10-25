@@ -4,3 +4,4 @@ pycollada==0.7.1
 Pillow==9.2.0
 streamlit==1.13.0
 vaderSentiment==3.3.2
+nltk==3.7
