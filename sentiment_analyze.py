@@ -12,7 +12,7 @@ from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
 #nltk.download('averaged_perceptron_tagger')
 nltk.download('all')
-pip install dill
+
 import re
 import dill
 import pickle
