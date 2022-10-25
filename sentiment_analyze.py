@@ -11,7 +11,7 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
 #nltk.download('averaged_perceptron_tagger')
-#nltk.download('all')
+nltk.download('all')
 
 import re
 import dill
