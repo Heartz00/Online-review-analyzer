@@ -41,8 +41,7 @@ st.set_page_config(
     layout="wide",
 )
 
-X_train = np.load('X_train.npy')
-X_train =  tfidf.fit_transform(X_train).toarray()
+
 
 def processing(data):
   lt = WordNetLemmatizer()
@@ -54,6 +53,9 @@ def processing(data):
     new_item = [lt.lemmatize(word) for word in new_item if word not in set(stopwords.words('english'))]
     corpus.append(' '.join(str(x) for x in new_item))
   return corpus
+
+X_train = np.load('X_train.npy')
+X_train =  tfidf.fit_transform(X_train).toarray()
 
 def main():
     st.title('Online Review Analyser')
