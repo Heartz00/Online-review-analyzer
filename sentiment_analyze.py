@@ -54,7 +54,7 @@ def processing(data):
     corpus.append(' '.join(str(x) for x in new_item))
   return corpus
 
-X_train = np.load('X_train.npy')
+X_train = np.load('train_f.npy')
 X_train =  tfidf.fit_transform(X_train).toarray()
 
 def main():
