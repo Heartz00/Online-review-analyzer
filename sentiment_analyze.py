@@ -26,6 +26,8 @@ predictor = pickle.load(file2)
 fitted = dill.load(file3)
 
 # Importing module
+df = pd.read_csv('LTrain.csv')
+df.drop(columns='Unnamed: 0', inplace=True)
 
 from sklearn.feature_extraction.text import TfidfVectorizer as tf_idf
 tfidf = tf_idf(ngram_range=(1,4),
@@ -53,9 +55,12 @@ def processing(data):
     new_item = [lt.lemmatize(word) for word in new_item if word not in set(stopwords.words('english'))]
     corpus.append(' '.join(str(x) for x in new_item))
   return corpus
+corpus = processing(df['Reviews'])
+X_train, X_dev, y_train, y_dev = train_test_split(X, y, test_size = 0.20, random_state = 0)
 
-X_train = np.load('train_g.npy')
-X_train =  tfidf.fit_transform(X_train).toarray()
+tf_x_train =  tfidf.fit_transform(X_train).toarray()
+model= SGDClassifier()
+model.fit(tf_x_train,y_train)
 
 def main():
     st.title('Online Review Analyser')
@@ -74,7 +79,7 @@ def main():
         #data = pd.DataFrame({'Reviews':[user_input]})
         process_input = processing([[user_input]])
         vector_input = tfidf.transform(process_input)
-        predictions = predictor.predict(vector_input)
+        predictions = model.predict(vector_input)
         #return predictions
         #predictions = load_pred()
         if predictions==1:
