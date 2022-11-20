@@ -28,9 +28,9 @@ fitted = dill.load(file3)
 # Importing module
 
 from sklearn.feature_extraction.text import TfidfVectorizer as tf_idf
-tfidf = tf_idf(ngram_range=(1,5),
-          min_df=2, max_df=0.9, strip_accents='unicode', use_idf=1,
-          smooth_idf=1, sublinear_tf=1,analyzer='word',norm='l2')
+tfidf = tf_idf(ngram_range=(1,4),
+          min_df=3, max_df=0.9, use_idf=1,
+          smooth_idf=1, sublinear_tf=1, binary=bool)
 
 
 
