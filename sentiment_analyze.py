@@ -18,8 +18,8 @@ import dill
 import pickle
 
 
-file1 = open('processing_function.pkl', 'rb')
-file2 = open('sentiment_model.pkl', 'rb')
+file1 = open('processing_function.pkl0', 'rb')
+file2 = open('sentiment_model.pkl0', 'rb')
 file3 =  open('fitted_tfidf1.pkl0', 'rb')
 processor = dill.load(file1)
 predictor = pickle.load(file2)
