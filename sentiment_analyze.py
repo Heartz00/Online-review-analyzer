@@ -66,7 +66,7 @@ def processing(data):
   return corpus
 corpus = processing(train_dff['Reviews'])
 X =corpus
-y = df.Sentiments.values
+y = train_dff.Sentiments.values
 from sklearn.model_selection import train_test_split
 X_train, X_dev, y_train, y_dev = train_test_split(X, y, test_size = 0.20, random_state = 0)
 
