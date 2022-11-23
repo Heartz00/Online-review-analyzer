@@ -28,6 +28,15 @@ fitted = dill.load(file3)
 # Importing module
 df = pd.read_csv('LTrain.csv')
 df.drop(columns='Unnamed: 0', inplace=True)
+train_df1 = df[df['Sentiments']==1] # rows with positive sentiments
+train_df2 = df[df['Sentiments']==0]   #rows with negative sentiments
+#concatenate the two data with positive and negative sentiment
+train_dff = pd.concat([train_df1.sample(n=2000), train_df2.sample(n=2000)])
+train_dff = train_dff.sample(frac=1)
+train_dff.reset_index(inplace=True)
+train_dff.drop(columns='index', inplace=True)
+
+
 
 from sklearn.feature_extraction.text import TfidfVectorizer as tf_idf
 tfidf = tf_idf(ngram_range=(1,4),
@@ -55,7 +64,7 @@ def processing(data):
     new_item = [lt.lemmatize(word) for word in new_item if word not in set(stopwords.words('english'))]
     corpus.append(' '.join(str(x) for x in new_item))
   return corpus
-corpus = processing(df['Reviews'])
+corpus = processing(train_dff['Reviews'])
 X =corpus
 y = df.Sentiments.values
 from sklearn.model_selection import train_test_split
