@@ -43,7 +43,7 @@ st.set_page_config(
 )
 
 
-
+@st.cache
 def processing(data):
   lt = WordNetLemmatizer()
   corpus = []
@@ -64,7 +64,7 @@ tf_x_train =  tfidf.fit_transform(X_train).toarray()
 from sklearn.linear_model import SGDClassifier
 model= SGDClassifier()
 model.fit(tf_x_train,y_train)
-
+@st.cache
 def main():
     st.title('Online Review Analyser')
     image = Image.open('emotions.png')
