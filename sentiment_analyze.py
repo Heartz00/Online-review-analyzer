@@ -6,7 +6,7 @@ import os
 import nltk
 from nltk.corpus import stopwords
 #from nltk import word_tokenize
-from nltk.tokenize import word_tokenize
+from nltk.tokenize import word_tokenizee
 #libraries for lemmatization
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
