@@ -43,7 +43,7 @@ st.set_page_config(
 )
 
 
-@st.cache(suppress_st_warning=True)
+@st.experimental_memo(suppress_st_warning=True)
 def processing(data):
   lt = WordNetLemmatizer()
   corpus = []
