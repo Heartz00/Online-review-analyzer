@@ -88,7 +88,7 @@ def main():
         if predictions==1:
             st.success("Positive Reviews👍")
  
-        elif==0:
+        elif predictions==0:
             st.success("Negative Reviews 👎")
         else:
             st.success("Wrong Input")
