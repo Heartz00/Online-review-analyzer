@@ -14,7 +14,7 @@ from nltk.corpus import wordnet
 nltk.download('all')
 
 import re
-
+st.experimental_memo(suppress_st_warning=True)
 # Importing module
 df = pd.read_csv('LTrain.csv')
 df.drop(columns='Unnamed: 0', inplace=True)
