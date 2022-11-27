@@ -11,23 +11,16 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
 #nltk.download('averaged_perceptron_tagger')
-nltk.download('all')
+#nltk.download('all')
 
 import re
 
 # Importing module
 @st.cache(ttl=24*60*60)
-def run():
-  df = pd.read_csv('LTrain.csv')
-  df.drop(columns='Unnamed: 0', inplace=True)
-  train_df1 = df[df['Sentiments']==1] # rows with positive sentiments
-  train_df2 = df[df['Sentiments']==0]   #rows with negative sentiments
-  #concatenate the two data with positive and negative sentiment
-  train_dff = pd.concat([train_df1.sample(n=2000), train_df2.sample(n=2000)])
-  train_dff = train_dff.sample(frac=1)
-  train_dff.reset_index(inplace=True)
-  train_dff.drop(columns='index', inplace=True)
-run()
+
+df = pd.read_csv('LTrain.csv')
+df.drop(columns='Unnamed: 0', inplace=True)
+@st.cache(ttl=24*60*60)
 
 from sklearn.feature_extraction.text import TfidfVectorizer as tf_idf
 tfidf = tf_idf(ngram_range=(1,4),
@@ -44,7 +37,6 @@ st.set_page_config(
 )
 
 
-@st.cache(ttl=24*60*60)
 def processing(data):
   lt = WordNetLemmatizer()
   corpus = []
@@ -55,9 +47,12 @@ def processing(data):
     new_item = [lt.lemmatize(word) for word in new_item if word not in set(stopwords.words('english'))]
     corpus.append(' '.join(str(x) for x in new_item))
   return corpus
-corpus = processing(train_dff['Reviews'])
+corpus = processing(df['Reviews'])
+
+@st.cache(ttl=24*60*60)
+
 X =corpus
-y = train_dff.Sentiments.values
+y = df.Sentiments.values
 from sklearn.model_selection import train_test_split
 X_train, X_dev, y_train, y_dev = train_test_split(X, y, test_size = 0.20, random_state = 0)
 
@@ -66,6 +61,7 @@ from sklearn.linear_model import SGDClassifier
 model= SGDClassifier()
 model.fit(tf_x_train,y_train)
 
+@st.cache(ttl=24*60*60)
 def main():
     st.title('Online Review Analyser')
     image = Image.open('emotions.png')
@@ -92,7 +88,7 @@ def main():
         elif predictions==0:
             st.success("Negative Reviews 👎")
         else:
-            st.success("Wrong Input")
+            st.error("Wrong Input")
                   
 
         
