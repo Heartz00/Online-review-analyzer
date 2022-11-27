@@ -16,17 +16,18 @@ nltk.download('all')
 import re
 
 # Importing module
-df = pd.read_csv('LTrain.csv')
-df.drop(columns='Unnamed: 0', inplace=True)
-train_df1 = df[df['Sentiments']==1] # rows with positive sentiments
-train_df2 = df[df['Sentiments']==0]   #rows with negative sentiments
-#concatenate the two data with positive and negative sentiment
-train_dff = pd.concat([train_df1.sample(n=2000), train_df2.sample(n=2000)])
-train_dff = train_dff.sample(frac=1)
-train_dff.reset_index(inplace=True)
-train_dff.drop(columns='index', inplace=True)
-
-
+@st.cache(ttl=24*60*60)
+def run():
+  df = pd.read_csv('LTrain.csv')
+  df.drop(columns='Unnamed: 0', inplace=True)
+  train_df1 = df[df['Sentiments']==1] # rows with positive sentiments
+  train_df2 = df[df['Sentiments']==0]   #rows with negative sentiments
+  #concatenate the two data with positive and negative sentiment
+  train_dff = pd.concat([train_df1.sample(n=2000), train_df2.sample(n=2000)])
+  train_dff = train_dff.sample(frac=1)
+  train_dff.reset_index(inplace=True)
+  train_dff.drop(columns='index', inplace=True)
+run()
 
 from sklearn.feature_extraction.text import TfidfVectorizer as tf_idf
 tfidf = tf_idf(ngram_range=(1,4),
