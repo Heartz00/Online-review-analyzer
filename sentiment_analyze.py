@@ -14,7 +14,7 @@ from nltk.corpus import wordnet
 nltk.download('all')
 
 import re
-st.experimental_memo(suppress_st_warning=True)
+@st.cache(ttl=24*60*60)
 # Importing module
 df = pd.read_csv('LTrain.csv')
 df.drop(columns='Unnamed: 0', inplace=True)
@@ -43,7 +43,7 @@ st.set_page_config(
 )
 
 
-@st.experimental_memo(suppress_st_warning=True)
+@st.cache(ttl=24*60*60)
 def processing(data):
   lt = WordNetLemmatizer()
   corpus = []
