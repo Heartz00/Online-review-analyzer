@@ -12,11 +12,7 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
 #nltk.download('averaged_perceptron_tagger')
-@st.cache(ttl=24*60*60)
-def download():
-          nltk.download('all')
-download()
-import re
+
 
 # Importing module
 df = pd.read_csv('LTrain.csv')
@@ -37,7 +33,11 @@ st.set_page_config(
     layout="wide",
 )
 
-
+@st.cache(ttl=24*60*60)
+def download():
+          nltk.download('all')
+download()
+import re
 def processing(data):
   lt = WordNetLemmatizer()
   corpus = []
