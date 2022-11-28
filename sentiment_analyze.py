@@ -16,8 +16,6 @@ from nltk.corpus import wordnet
 import re
 
 # Importing module
-@st.cache(ttl=24*60*60)
-
 df = pd.read_csv('LTrain.csv')
 df.drop(columns='Unnamed: 0', inplace=True)
 @st.cache(ttl=24*60*60)
