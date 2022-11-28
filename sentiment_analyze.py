@@ -31,7 +31,7 @@ X_train = np.load('X_train0.npy')
 # Importing module
 
 from sklearn.feature_extraction.text import TfidfVectorizer as tf_idf
-tfidf = tf_idf(ngram_range=(1,4),
+tfidf = tf_idf(ngram_range=(1,7),
           min_df=3, max_df=0.9, use_idf=1,
           smooth_idf=1, sublinear_tf=1, binary=bool)
 
