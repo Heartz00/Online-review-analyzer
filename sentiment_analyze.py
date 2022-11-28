@@ -18,7 +18,7 @@ import re
 # Importing module
 df = pd.read_csv('LTrain.csv')
 df.drop(columns='Unnamed: 0', inplace=True)
-@st.cache(ttl=24*60*60)
+
 
 from sklearn.feature_extraction.text import TfidfVectorizer as tf_idf
 tfidf = tf_idf(ngram_range=(1,4),
@@ -47,7 +47,7 @@ def processing(data):
   return corpus
 corpus = processing(df['Reviews'])
 
-@st.cache(ttl=24*60*60)
+
 
 X =corpus
 y = df.Sentiments.values
