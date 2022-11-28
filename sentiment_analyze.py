@@ -4,18 +4,18 @@ import numpy as np
 import pandas as pd
 import os
 import nltk
-nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk import word_tokenize
 nltk.download('wordnet')
-nltk.download('omw-1.4')
 from nltk.tokenize import word_tokenize
 #libraries for lemmatization
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
 #nltk.download('averaged_perceptron_tagger')
-#nltk.download('all')
-
+@st.cache(ttl=24*60*60)
+def download():
+          nltk.download('all')
+download()
 import re
 
 # Importing module
