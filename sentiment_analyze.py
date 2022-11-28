@@ -5,19 +5,27 @@ import pandas as pd
 import os
 import nltk
 from nltk.corpus import stopwords
-from nltk import word_tokenize
-nltk.download('wordnet')
+#from nltk import word_tokenize
 from nltk.tokenize import word_tokenize
 #libraries for lemmatization
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
 #nltk.download('averaged_perceptron_tagger')
+#nltk.download('all')
 
+import re
+import dill
+import pickle
+
+
+file1 = open('processing_function.pkl0', 'rb')
+file2 = open('sentiment_model.pkl0', 'rb')
+file3 =  open('fitted_tfidf1.pkl0', 'rb')
+processor = dill.load(file1)
+predictor = joblib.load('new_model')
+fitted = dill.load(file3)
 
 # Importing module
-df = pd.read_csv('LTrain.csv')
-df.drop(columns='Unnamed: 0', inplace=True)
-
 
 from sklearn.feature_extraction.text import TfidfVectorizer as tf_idf
 tfidf = tf_idf(ngram_range=(1,4),
@@ -33,37 +41,10 @@ st.set_page_config(
     layout="wide",
 )
 
-@st.cache(ttl=24*60*60)
-def download():
-          nltk.download('all')
-download()
-import re
-def processing(data):
-  lt = WordNetLemmatizer()
-  corpus = []
-  for item in data:
-    new_item = re.sub('[^a-zA-Z]',' ',str(item))
-    new_item = new_item.lower()
-    new_item = new_item.split()
-    new_item = [lt.lemmatize(word) for word in new_item if word not in set(stopwords.words('english'))]
-    corpus.append(' '.join(str(x) for x in new_item))
-  return corpus
-corpus = processing(df['Reviews'])
 
 
 
-X =corpus
-y = df.Sentiments.values
-from sklearn.model_selection import train_test_split
-X_train, X_dev, y_train, y_dev = train_test_split(X, y, test_size = 0.20, random_state = 0)
 
-tf_x_train =  tfidf.fit_transform(X_train).toarray()
-from sklearn.linear_model import SGDClassifier
-model= SGDClassifier()
-model.fit(tf_x_train,y_train)
-
-
-@st.cache(ttl=24*60*60)
 def main():
     st.title('Online Review Analyser')
     image = Image.open('emotions.png')
@@ -79,19 +60,16 @@ def main():
         st.info('Result')
         #def load_pred():
         #data = pd.DataFrame({'Reviews':[user_input]})
-        process_input = processing([[user_input]])
-        vector_input = tfidf.transform(process_input)
-        predictions = model.predict(vector_input)
+        #process_input = processor([[user_input]])
+        #vector_input = tfidf.transform(process_input)
+        predictions = predictor.predict(user_input)
         #return predictions
         #predictions = load_pred()
         if predictions==1:
             st.success("Positive Reviews👍")
  
-        elif predictions==0:
-            st.success("Negative Reviews 👎")
         else:
-            st.error("Wrong Input")
-                  
+            st.success("Negative Reviews 👎")
 
         
         
