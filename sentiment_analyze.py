@@ -65,7 +65,7 @@ def main():
         #data = pd.DataFrame({'Reviews':[user_input]})
         process_input = processor([[user_input]])
         #vector_input = tfidf.transform(process_input)
-        predictions = predictor.predict(process_input.reshape(-1,1))
+        predictions = predictor.predict(process_input)
         #return predictions
         #predictions = load_pred()
         if predictions==1:
