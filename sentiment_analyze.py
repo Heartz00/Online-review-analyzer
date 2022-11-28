@@ -16,7 +16,7 @@ from nltk.corpus import wordnet
 import re
 import dill
 import pickle
-
+import joblib
 
 file1 = open('processing_function.pkl0', 'rb')
 file2 = open('sentiment_model.pkl0', 'rb')
