@@ -60,9 +60,9 @@ def main():
         st.info('Result')
         #def load_pred():
         #data = pd.DataFrame({'Reviews':[user_input]})
-        #process_input = processor([[user_input]])
+        process_input = processor([[user_input]])
         #vector_input = tfidf.transform(process_input)
-        predictions = predictor.predict([[user_input]])
+        predictions = predictor.predict(process_input)
         #return predictions
         #predictions = load_pred()
         if predictions==1:
