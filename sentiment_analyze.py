@@ -7,6 +7,7 @@ import nltk
 nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk import word_tokenize
+nltk.download('wordnet')
 from nltk.tokenize import word_tokenize
 #libraries for lemmatization
 from nltk.stem import WordNetLemmatizer
