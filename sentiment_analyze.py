@@ -46,8 +46,7 @@ st.set_page_config(
 
 
 
-
-@st.cache(suppress_st_warning=True)   
+ 
 def main():
     st.title('Online Review Analyser')
     image = Image.open('emotions.png')
