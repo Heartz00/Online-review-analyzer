@@ -28,7 +28,7 @@ processor = dill.load(file1)
 predictor = joblib.load('new_model')
 fitted = dill.load(file3)
 X_train = np.load('train_g.npy')
-X_train = X_train.reshape(-1)
+X_train = X_train.reshape(-1, 1)
 # Importing module
 
 from sklearn.feature_extraction.text import TfidfVectorizer as tf_idf
