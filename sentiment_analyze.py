@@ -66,7 +66,7 @@ def main():
         #data = pd.DataFrame({'Reviews':[user_input]})
         process_input = processor([[user_input]])
         tf_x_train =  tfidf.fit_transform(train).toarray()
-        vector_input = tfidf.transform(tf_x_train)
+        vector_input = tfidf.transform(tf_x_train.tolist())
         predictions = predictor.predict(vector_input)
         #return predictions
         #predictions = load_pred()
