@@ -13,8 +13,7 @@ from nltk.tokenize import word_tokenize
 #libraries for lemmatization
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import wordnet
-#nltk.download('averaged_perceptron_tagger')
-#nltk.download('all')
+
 
 import re
 import dill
@@ -28,7 +27,7 @@ processor = dill.load(file1)
 predictor = joblib.load('new_model')
 fitted = dill.load(file3)
 X_train = np.load('train_g.npy')
-train = X_train.tolist()
+
 # Importing module
 
 from sklearn.feature_extraction.text import TfidfVectorizer as tf_idf
@@ -36,7 +35,7 @@ tfidf = tf_idf(ngram_range=(1,7),
           min_df=3, max_df=0.9, use_idf=1,
           smooth_idf=1, sublinear_tf=1, binary=bool)
 
-
+tf_x_train =  tfidf.fit_transform(X_train.tolist()).toarray()
 
 # Importing module
 st.set_page_config(
@@ -48,7 +47,7 @@ st.set_page_config(
 
 
 
-
+@st.cache(suppress_st_warning=True)   
 def main():
     st.title('Online Review Analyser')
     image = Image.open('emotions.png')
@@ -62,22 +61,20 @@ def main():
     
     if submit:
         st.info('Result')
-        #def load_pred():
-        #data = pd.DataFrame({'Reviews':[user_input]})
         process_input = processor([[user_input]])
-        tf_x_train =  tfidf.fit_transform(train).toarray()
-        vector_input = tfidf.transform(tf_x_train.tolist())
+        vector_input = tfidf.transform(process_input).toarray()
         predictions = predictor.predict(vector_input)
         #return predictions
         #predictions = load_pred()
         if predictions==1:
             st.success("Positive Reviews👍")
  
-        else:
+        elif predictions==0:
             st.success("Negative Reviews 👎")
+        else:
+            st.error("wrong input")
 
-        
-        
+
 
 
 if __name__=='__main__':
