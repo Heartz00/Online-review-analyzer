@@ -28,6 +28,7 @@ processor = dill.load(file1)
 predictor = joblib.load('new_model')
 fitted = dill.load(file3)
 X_train = np.load('train_g.npy')
+X_train = X_train.reshape(-1)
 # Importing module
 
 from sklearn.feature_extraction.text import TfidfVectorizer as tf_idf
@@ -64,7 +65,7 @@ def main():
         #def load_pred():
         #data = pd.DataFrame({'Reviews':[user_input]})
         process_input = processor([[user_input]])
-        tf_x_train =  tfidf.fit_transform(X_train).toarray()
+        tf_x_train =  tfidf.fit_transform(pd.DataFrame(X_train)).toarray()
         vector_input = tfidf.transform(tf_x_train)
         predictions = predictor.predict(vector_input)
         #return predictions
