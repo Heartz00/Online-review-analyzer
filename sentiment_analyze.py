@@ -20,13 +20,12 @@ import dill
 import pickle
 import joblib
 
-file1 = open('processing_function.pkl0', 'rb')
-file2 = open('sentiment_model.pkl0', 'rb')
-file3 =  open('fitted_tfidf1.pkl0', 'rb')
+file1 = open('processing_.pkl', 'rb')
+file3 =  open('fit_tfidf1.pkl0', 'rb')
 processor = dill.load(file1)
-predictor = joblib.load('new_model')
+predictor = joblib.load('new-model')
 fitted = dill.load(file3)
-X_train = np.load('X_train.zip')
+X_train = np.load('XX_traiN')
 
 # Importing module
 
