@@ -25,7 +25,7 @@ file3 =  open('fit_tfidf1.pkl', 'rb')
 processor = dill.load(file1)
 predictor = joblib.load('new-model')
 fitted = dill.load(file3)
-X_train = np.load('XX_traiN')
+X_train = np.load('XX_traiN.npy')
 
 # Importing module
 
