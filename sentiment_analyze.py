@@ -69,8 +69,7 @@ def main():
  
         elif predictions==0:
             st.success("Negative Reviews 👎")
-        else:
-            st.error("wrong input")
+       
 
 
 
