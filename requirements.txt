@@ -1,5 +1,5 @@
 Pillow==9.2.0
-streamlit==1.10.0
+streamlit==1.15.0
 vaderSentiment==3.3.2
 nltk==3.7
 dill==0.3.6
